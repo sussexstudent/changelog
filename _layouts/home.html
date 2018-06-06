@@ -1,0 +1,29 @@
+---
+layout: default
+---
+
+<div>
+  <ul class="BlogList">
+    {% for post in site.posts %}
+      <li class="BlogList__item">
+        <header class="post-header">
+          <div class="BlogList__meta">{{ post.date | date: "%b %-d, %Y" }}</div>
+          <a class="BlogList__item-title-anchor" href="{{ post.url | relative_url }}">
+            <h1 class="BlogList__item-title type-double-pica">
+              {{ post.title | escape }}{% if post.external-url %} &rarr;{% endif %}
+            </h1>
+          </a>
+
+          <ul class="BlogList__tags type-minion List List--reset">
+            {% for tag in post.tags %}
+              <li class="Tag tag-{{tag | slugify }}">
+                 {% assign tagname = tag | split: ":" %}
+                {{tagname[0]}}: {{tagname[1]}}
+              </li>
+            {% endfor %}
+          </ul>
+        </header>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
